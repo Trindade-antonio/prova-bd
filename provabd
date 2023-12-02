@@ -1,0 +1,35 @@
+CREATE DATABASE games;
+
+USE games;
+
+CREATE TABLE Categorias (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255)
+);
+
+CREATE TABLE Jogos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(255) NOT NULL,
+    competitivo BOOLEAN NOT NULL,
+    id_categoria INT NOT NULL,
+    FOREIGN KEY (id_categoria) REFERENCES Categorias(id)
+);
+
+CREATE TABLE Plataforma (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    id_jogo INT NOT NULL,
+    FOREIGN KEY (id_jogo) REFERENCES Jogos(id)
+);
+
+
+CREATE TABLE Jogos_possui_Plataforma (
+    id_jogo INT NOT NULL,
+    id_plataforma INT NOT NULL,
+    PRIMARY KEY (id_jogo,id_plataforma),
+    FOREIGN KEY (id_jogo) REFERENCES Jogos(id),
+    FOREIGN KEY (id_plataforma) REFERENCES Plataforma(id)
+);
+
+
+
